@@ -1,9 +1,8 @@
 import {Printer} from "../interfaces/CPrinterClass";
-import PrinterInstance from "./PrinterInstance";
 
 
 class PrinterManager {
-    private map: Map<string, { class: PrinterInstance, interval: NodeJS.Timer }> = new Map();
+    private map: Map<string, { class: Printer, interval: NodeJS.Timer }> = new Map();
 
 
     private static isUrl(s) {
@@ -11,22 +10,20 @@ class PrinterManager {
         return regexp.test(s);
     }
 
-    addPrinter(name: string, url: string, printerType: Printer, sendToDataTechnologies: string[], intervalSeconds: number) {
+    addPrinter(instance: Printer, intervalSeconds: number) {
         //check for invalid options
-        if (this.map.has(name)) return "NAME_ALREADY_IN_USE";
-        if (!PrinterManager.isUrl(url)) return "URL_NOT_VALID";
-        //create object
-        const x = new PrinterInstance(name, url, printerType, sendToDataTechnologies);
+        if (this.map.has(instance.getUid())) return "NAME_ALREADY_IN_USE";
+        if (!PrinterManager.isUrl(instance.getUrl())) return "URL_NOT_VALID";
         //create interval
-        const interval = setInterval((name) => this.handler(name), intervalSeconds, name);
+        const interval = setInterval((name) => this.handler(instance.getUid()), intervalSeconds, instance.getUid());
         //save data
-        this.map.set(name, {
-            class: x,
+        this.map.set(instance.getUid(), {
+            class: instance,
             interval
         });
         //call handler initially
-        this.handler(name);
-        console.log("[%s] Added Printer " + name, process.uptime());
+        this.handler(instance.getUid());
+        console.log("[%s] Added Printer " + instance.getUid(), process.uptime());
     }
 
 

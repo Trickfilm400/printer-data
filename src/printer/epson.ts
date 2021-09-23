@@ -4,7 +4,7 @@ import {Printer} from "../interfaces/CPrinterClass";
 import {PrinterResult} from "../interfaces/IPrinterResult";
 
 export default class Epson extends Printer {
-    async getData(url: string) {
+    async getData() {
 
         let json: PrinterResult = {
             black: -1,
@@ -14,7 +14,7 @@ export default class Epson extends Printer {
             status: null
         };
         return new Promise<PrinterResult>((resolve, reject) => {
-            fetch(url + "/PRESENTATION/HTML/TOP/PRTINFO.HTML").then(res => {
+            fetch(this.getUrl() + "/PRESENTATION/HTML/TOP/PRTINFO.HTML").then(res => {
                 //console.log(res);
                 if (res.status !== 200) throw new Error("PRINTER_UNAVAILABLE");
                 return res.text();

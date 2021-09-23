@@ -1,13 +1,13 @@
 import fetch from "node-fetch";
-import {Printer} from "../interfaces/CPrinterClass";
+import {Printer, PrinterType} from "../interfaces/CPrinterClass";
 import {PrinterResult} from "../interfaces/IPrinterResult";
 
 export default class Canon extends Printer {
-    async getData(url: string) {
+    async getData() {
 
         let json = {};
         return new Promise<PrinterResult>((resolve, reject) => {
-            fetch(url + "/JS_MDL/model.js").then(res => {
+            fetch(this.getUrl() + "/JS_MDL/model.js").then(res => {
                 //console.log(res);
                 if (res.status !== 200) throw new Error("PRINTER_UNAVAILABLE");
                 return res.text();

@@ -4,7 +4,7 @@ import {JSDOM} from "jsdom";
 import {Printer} from "../interfaces/CPrinterClass";
 
 export default class Brother extends Printer {
-    async getData(url: string) {
+    async getData() {
 
         let json: PrinterResult = {
             black: -1,
@@ -14,7 +14,7 @@ export default class Brother extends Printer {
             status: null
         };
         return new Promise<PrinterResult>((resolve, reject) => {
-            fetch(url).then(res => {
+            fetch(this.getUrl()).then(res => {
                 //console.log(res);
                 if (res.status !== 200) throw new Error("PRINTER_UNAVAILABLE");
                 return res.text();
