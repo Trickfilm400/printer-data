@@ -1,10 +1,10 @@
 import {PrinterResult} from "./IPrinterResult";
-import {IPrinterClass} from "./IPrinterClass";
 
-export abstract class Printer implements IPrinterClass {
+export abstract class Printer {
     private readonly url: string;
     private readonly uid: string;
     private readonly sendToDataTechnologies: string[];
+    private readonly dataSaveMode: boolean;
     private lastPrinterResult: PrinterResult | null;
 
     public getUrl() {
@@ -19,10 +19,11 @@ export abstract class Printer implements IPrinterClass {
         return this.sendToDataTechnologies;
     }
 
-    constructor(url: string, uid: string, sendToDataTechnologies: string[]) {
+    constructor(url: string, uid: string, sendToDataTechnologies: string[], dataSaveMode = false) {
         this.url = url;
         this.uid = uid;
         this.sendToDataTechnologies = sendToDataTechnologies;
+        this.dataSaveMode = dataSaveMode;
         this.lastPrinterResult = null;
     }
 
