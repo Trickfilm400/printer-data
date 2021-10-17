@@ -6,7 +6,7 @@ export abstract class Printer {
     private readonly uid: string;
     private readonly sendToDataTechnologies: string[];
     private readonly dataSaveMode: boolean;
-    private readonly lastPrinterResult: PrinterResult | null;
+    private lastPrinterResult: PrinterResult | null;
 
     public getUrl() {
         return this.uid;
@@ -46,6 +46,7 @@ export abstract class Printer {
         this.sendToDataTechnologies.forEach(t => {
             technologyMapping.get(t).send(this.uid, data);
         });
+        this.lastPrinterResult = data;
     }
 }
 

@@ -29,14 +29,24 @@ class PrinterManager {
 
     private async handler(name: string) {
         const obj = this.map.get(name);
-        const data = await obj.class.getData();
-        console.log("data", name, data);
-        if (obj.class.getDataSaveMode()) {
-            //todo fix
-            if (data === obj.class.getLastPrinterResult()) return false;
-        }
-        if (data) {
-            obj.class.pushData(data);
+        try {
+            const data = await obj.class.getData();
+            console.log("data", name, data, obj.class.getLastPrinterResult());
+            if (obj.class.getDataSaveMode()) {
+                if (
+                    data.magenta === obj.class.getLastPrinterResult()?.magenta &&
+                    data.yellow === obj.class.getLastPrinterResult()?.yellow &&
+                    data.cyan === obj.class.getLastPrinterResult()?.cyan &&
+                    data.black === obj.class.getLastPrinterResult()?.black &&
+                    data.status === obj.class.getLastPrinterResult()?.status) {
+                    return false;
+                }
+            }
+            if (data) {
+                obj.class.pushData(data);
+            }
+        } catch (e) {
+            console.log(e);
         }
     }
 
