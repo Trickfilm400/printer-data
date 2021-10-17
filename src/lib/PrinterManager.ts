@@ -22,7 +22,7 @@ class PrinterManager {
             interval
         });
         //call handler initially
-        this.handler(instance.getUid());
+        this.handler(instance.getUid()).catch(console.error);
         console.log("[%s] Added Printer " + instance.getUid(), process.uptime());
     }
 
@@ -30,8 +30,13 @@ class PrinterManager {
     private async handler(name: string) {
         const obj = this.map.get(name);
         const data = await obj.class.getData();
-        console.log("data", data);
+        console.log("data", name, data);
+        if (obj.class.getDataSaveMode()) {
+            //todo fix
+            if (data === obj.class.getLastPrinterResult()) return false;
+        }
         if (data) {
+            obj.class.pushData(data);
         }
     }
 

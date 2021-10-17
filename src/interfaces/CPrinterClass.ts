@@ -19,6 +19,13 @@ export abstract class Printer {
         return this.sendToDataTechnologies;
     }
 
+    public getDataSaveMode() {
+        return this.dataSaveMode;
+    }
+    public getLastPrinterResult() {
+        return this.lastPrinterResult;
+    }
+
     constructor(url: string, uid: string, sendToDataTechnologies: string[], dataSaveMode = false) {
         this.url = url;
         this.uid = uid;
@@ -32,6 +39,10 @@ export abstract class Printer {
     async getType(): Promise<PrinterType> {
         let data = await this.getData();
         return (data.cyan == -1 && data.magenta == -1 && data.yellow == -1) ? PrinterType.BLACKWHITE : PrinterType.COLOR;
+    }
+
+    public pushData(data: PrinterResult) {
+
     }
 }
 
