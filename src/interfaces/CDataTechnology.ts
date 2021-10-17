@@ -1,9 +1,13 @@
 
+export const technologyMapping: Map<string, DataTechnology> = new Map;
+
+
 export abstract class DataTechnology {
     protected readonly uid: string;
 
-    constructor(uid: string) {
+    protected constructor(uid: string) {
         this.uid = uid;
+        technologyMapping.set(uid, this);
     }
 
     log(name: string, data: object) {

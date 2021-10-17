@@ -8,5 +8,6 @@ export interface IPrinterConfig {
     type: x,
     dataSaveMode?: boolean,
     sendToDataTechnologies?: string[],
+    //ms
     interval: number
 }

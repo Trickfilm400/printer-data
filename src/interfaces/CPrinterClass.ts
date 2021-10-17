@@ -1,11 +1,12 @@
 import {PrinterResult} from "./IPrinterResult";
+import {technologyMapping} from "./CDataTechnology";
 
 export abstract class Printer {
     private readonly url: string;
     private readonly uid: string;
     private readonly sendToDataTechnologies: string[];
     private readonly dataSaveMode: boolean;
-    private lastPrinterResult: PrinterResult | null;
+    private readonly lastPrinterResult: PrinterResult | null;
 
     public getUrl() {
         return this.uid;
@@ -42,7 +43,9 @@ export abstract class Printer {
     }
 
     public pushData(data: PrinterResult) {
-
+        this.sendToDataTechnologies.forEach(t => {
+            technologyMapping.get(t).send(this.uid, data);
+        });
     }
 }
 
