@@ -1,12 +1,24 @@
-FROM node:16-alpine3.13
+FROM node:16-alpine3.14 AS builder
+
+WORKDIR /builder
+
+COPY . .
+
+RUN npm ci
+RUN npm run build
+RUN npm ci --only=production
+
+
+
+FROM node:16-alpine3.14
 # set working directory
 WORKDIR /app
 
 MAINTAINER Trickfilm400 <info@trickfilm400.de>
 
-COPY dist/ dist/
-COPY package*.json dist/
+COPY --from=builder /builder/dist/ dist/
+COPY --from=builder /builder/package*.json dist/
+COPY --from=builder /builder/node_modules/ node_modules/
 
-RUN npm ci
 
-ENTRYPOINT ["node", "dist/"]
+ENTRYPOINT ["node", "."]
