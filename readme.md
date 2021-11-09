@@ -1,6 +1,6 @@
 # printer-data (typescript)
 
-**This project gets printer data via http requests and send them to a mqtt broker or via socket.io**
+**This project gets printer data (Ink Status (%) and System Status) via http requests and send them to a mqtt broker or via socket.io**
 
 ## Features
 * set printers and every setting via config file
@@ -33,9 +33,9 @@
 
 ## Usage
 - Github Packages:
-  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/dist/config.js ghcr.io/trickfilm400/printer-data:master`
+  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/config.js ghcr.io/trickfilm400/printer-data:master`
 - Docker Hub
-  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/dist/config.js n404/printer-data:latest`
+  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/config.js n404/printer-data:latest`
 
 ## Other
 - Any questions, issues or feature requests? Contact me, for example, create an issue
