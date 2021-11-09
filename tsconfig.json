@@ -1,10 +1,13 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es6",
+		"module": "CommonJS",
+		"target": "ES2021",
 		"sourceMap": true,
         "outDir": "dist",
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+//		"noImplicitAny": true,
+		"removeComments": true,
+		"esModuleInterop": true,
 	},
 	"exclude": [
 		"node_modules"
