@@ -17,7 +17,7 @@ WORKDIR /app
 MAINTAINER Trickfilm400 <info@trickfilm400.de>
 
 COPY --from=builder /builder/dist/ dist/
-COPY --from=builder /builder/package*.json /
+COPY --from=builder /builder/package*.json /app/
 COPY --from=builder /builder/node_modules/ node_modules/
 
 
