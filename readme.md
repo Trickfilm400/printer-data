@@ -33,9 +33,9 @@
 
 ## Usage
 - Github Packages:
-  - `docker run -d --rm --name printer-data --restart=always -v config.js:/app/dist/config.js ghcr.io/trickfilm400/printer-data:master`
+  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/dist/config.js ghcr.io/trickfilm400/printer-data:master`
 - Docker Hub
-  - `docker run -d --rm --name printer-data --restart=always -v config.js:/app/dist/config.js n404/printer-data:latest`
+  - `docker run -d --name printer-data --restart=always -v ${PWD}/config.js:/app/dist/config.js n404/printer-data:latest`
 
 ## Other
 - Any questions, issues or feature requests? Contact me, for example, create an issue
